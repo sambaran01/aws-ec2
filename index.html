@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Component Playground</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1 class="logo">🎨 Component Playground</h1>
+            <div class="nav-links">
+                <a href="#buttons">Buttons</a>
+                <a href="#forms">Forms</a>
+                <a href="#cards">Cards</a>
+                <a href="#modals">Modals</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <section class="hero">
+            <h1>HTML Component Testing Ground</h1>
+            <p>A beautiful collection of HTML components for testing and learning</p>
+        </section>
+
+        <!-- Buttons Section -->
+        <section id="buttons" class="section">
+            <h2 class="section-title">Buttons</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Primary Buttons</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-primary">Primary</button>
+                        <button class="btn btn-secondary">Secondary</button>
+                        <button class="btn btn-success">Success</button>
+                        <button class="btn btn-danger">Danger</button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Button Sizes</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-primary btn-sm">Small</button>
+                        <button class="btn btn-primary">Medium</button>
+                        <button class="btn btn-primary btn-lg">Large</button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Outlined Buttons</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-outline-primary">Primary</button>
+                        <button class="btn btn-outline-secondary">Secondary</button>
+                        <button class="btn btn-outline-success">Success</button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Button States</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-primary">Normal</button>
+                        <button class="btn btn-primary" disabled>Disabled</button>
+                        <button class="btn btn-primary btn-loading">Loading...</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Forms Section -->
+        <section id="forms" class="section">
+            <h2 class="section-title">Form Elements</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Text Inputs</h3>
+                    <div class="demo-area">
+                        <div class="form-group">
+                            <label for="text-input">Text Input</label>
+                            <input type="text" id="text-input" class="form-control" placeholder="Enter text">
+                        </div>
+                        <div class="form-group">
+                            <label for="email-input">Email Input</label>
+                            <input type="email" id="email-input" class="form-control" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="password-input">Password Input</label>
+                            <input type="password" id="password-input" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Textarea & Select</h3>
+                    <div class="demo-area">
+                        <div class="form-group">
+                            <label for="textarea">Textarea</label>
+                            <textarea id="textarea" class="form-control" rows="3" placeholder="Enter your message"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="select">Select Dropdown</label>
+                            <select id="select" class="form-control">
+                                <option>Option 1</option>
+                                <option>Option 2</option>
+                                <option>Option 3</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Checkboxes & Radio</h3>
+                    <div class="demo-area">
+                        <div class="form-check">
+                            <input type="checkbox" id="check1" class="form-check-input">
+                            <label for="check1">Checkbox 1</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="checkbox" id="check2" class="form-check-input">
+                            <label for="check2">Checkbox 2</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="radio1" name="radio" class="form-check-input">
+                            <label for="radio1">Radio 1</label>
+                        </div>
+                        <div class="form-check">
+                            <input type="radio" id="radio2" name="radio" class="form-check-input">
+                            <label for="radio2">Radio 2</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Range & File</h3>
+                    <div class="demo-area">
+                        <div class="form-group">
+                            <label for="range">Range Slider</label>
+                            <input type="range" id="range" class="form-range" min="0" max="100" value="50">
+                            <span id="range-value">50</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="file">File Upload</label>
+                            <input type="file" id="file" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cards Section -->
+        <section id="cards" class="section">
+            <h2 class="section-title">Cards</h2>
+            <div class="component-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Card Title</h3>
+                    </div>
+                    <div class="card-body">
+                        <p>This is a basic card component with header, body, and footer sections.</p>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary btn-sm">Action</button>
+                    </div>
+                </div>
+                <div class="card">
+                    <img src="https://via.placeholder.com/400x200" alt="Card image" class="card-img">
+                    <div class="card-body">
+                        <h3>Image Card</h3>
+                        <p>A card with an image at the top.</p>
+                        <button class="btn btn-secondary btn-sm">Learn More</button>
+                    </div>
+                </div>
+                <div class="card card-highlight">
+                    <div class="card-body">
+                        <h3>Highlighted Card</h3>
+                        <p>This card has a special highlight style to draw attention.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modals Section -->
+        <section id="modals" class="section">
+            <h2 class="section-title">Modals & Alerts</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Modal Dialog</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-primary" onclick="openModal()">Open Modal</button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Alerts</h3>
+                    <div class="demo-area">
+                        <div class="alert alert-success">Success! Operation completed.</div>
+                        <div class="alert alert-warning">Warning! Please check your input.</div>
+                        <div class="alert alert-danger">Error! Something went wrong.</div>
+                        <div class="alert alert-info">Info: Here's some information.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Components -->
+        <section class="section">
+            <h2 class="section-title">Additional Components</h2>
+            <div class="component-grid">
+                <div class="component-card">
+                    <h3>Progress Bars</h3>
+                    <div class="demo-area">
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 25%">25%</div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: 50%">50%</div>
+                        </div>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-danger" style="width: 75%">75%</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Badges</h3>
+                    <div class="demo-area">
+                        <span class="badge badge-primary">Primary</span>
+                        <span class="badge badge-success">Success</span>
+                        <span class="badge badge-warning">Warning</span>
+                        <span class="badge badge-danger">Danger</span>
+                        <span class="badge badge-info">Info</span>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Tooltips</h3>
+                    <div class="demo-area">
+                        <button class="btn btn-secondary" data-tooltip="This is a tooltip!">Hover Me</button>
+                        <button class="btn btn-secondary" data-tooltip="Another tooltip">Hover Me Too</button>
+                    </div>
+                </div>
+                <div class="component-card">
+                    <h3>Loading Spinners</h3>
+                    <div class="demo-area">
+                        <div class="spinner"></div>
+                        <div class="spinner spinner-sm"></div>
+                        <div class="spinner spinner-lg"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Modal Title</h2>
+                <span class="modal-close" onclick="closeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>This is a modal dialog. You can put any content here!</p>
+                <div class="form-group">
+                    <label for="modal-input">Example Input</label>
+                    <input type="text" id="modal-input" class="form-control" placeholder="Type something">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-primary" onclick="closeModal()">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 HTML Component Playground. Built for testing and learning.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
