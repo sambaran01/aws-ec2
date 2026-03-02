@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Production 3-Tier Architecture - AWS Engineering Lab</title>
+    <link rel="stylesheet" href="aws-styles.css">
+    <link rel="stylesheet" href="project-detail.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg class="brand-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                </svg>
+                <span class="brand-text">AWS Engineering Lab</span>
+            </div>
+            <div class="nav-links">
+                <a href="aws-lab.html#home" class="nav-link">Home</a>
+                <a href="aws-lab.html#projects" class="nav-link">Projects</a>
+                <a href="aws-lab.html#learning-path" class="nav-link">Learning Path</a>
+                <a href="#docs" class="nav-link">Docs</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="project-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-section">
+                    <div class="sidebar-title">On This Page</div>
+                    <a href="#overview" class="sidebar-link active">Overview</a>
+                    <a href="#architecture" class="sidebar-link">Architecture</a>
+                    <a href="#step-1" class="sidebar-link">Step 1: Create VPC</a>
+                    <a href="#step-2" class="sidebar-link">Step 2: Create Subnets</a>
+                    <a href="#step-3" class="sidebar-link">Step 3: Configure Routing</a>
+                    <a href="#step-4" class="sidebar-link">Step 4: Deploy Servers</a>
+                    <a href="#step-5" class="sidebar-link">Step 5: Configure Monitoring</a>
+                    <a href="#commands" class="sidebar-link">Command Reference</a>
+                    <a href="#troubleshooting" class="sidebar-link">Troubleshooting</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="project-content">
+            <div class="project-header">
+                <div class="project-meta">
+                    <span class="project-category">Infrastructure</span>
+                    <span class="project-difficulty">Advanced</span>
+                </div>
+                <h1 class="project-main-title">Production 3-Tier Architecture</h1>
+                <p class="project-intro">Build a scalable, highly available web application infrastructure using AWS best practices. This project covers S3 static hosting, CloudFront CDN, Application Load Balancer, Auto Scaling, EC2 instances, and RDS Multi-AZ database.</p>
+                <div class="project-tags">
+                    <span class="tag">S3</span>
+                    <span class="tag">CloudFront</span>
+                    <span class="tag">EC2</span>
+                    <span class="tag">RDS</span>
+                    <span class="tag">Auto Scaling</span>
+                </div>
+            </div>
+
+            <section id="overview" class="content-section">
+                <h2>Overview</h2>
+                <p>A 3-tier architecture separates your application into three logical layers: presentation, application, and data. This separation provides better security, scalability, and maintainability for production systems.</p>
+                
+                <div class="info-box info-box-learn">
+                    <div class="info-box-title">What You Will Learn</div>
+                    <ul>
+                        <li>Design highly available multi-tier architectures</li>
+                        <li>Implement CDN for global content delivery</li>
+                        <li>Configure auto scaling for dynamic workloads</li>
+                        <li>Set up Multi-AZ RDS for database redundancy</li>
+                        <li>Secure network architecture with proper subnet design</li>
+                    </ul>
+                </div>
+                
+                <div class="info-box info-box-engineering">
+                    <div class="info-box-title">Engineering Notes</div>
+                    <p><strong>Why this architecture exists:</strong> 3-tier architectures provide clear separation of concerns, making systems easier to scale, secure, and maintain. Each tier can be scaled independently based on demand.</p>
+                    <p><strong>When to use it:</strong> Use this pattern for web applications that need high availability, global reach, and the ability to handle variable traffic loads.</p>
+                    <p><strong>Tradeoffs:</strong> Increased complexity and cost compared to simpler architectures. Requires more operational overhead but provides better reliability and performance.</p>
+                    <p><strong>Real-world usage:</strong> This pattern is used by companies like Netflix, Airbnb, and Spotify for their core web applications.</p>
+                </div>
+            </section>
+
+            <section id="architecture" class="content-section">
+                <h2>Architecture Diagram</h2>
+                <div class="architecture-placeholder">
+                    <svg width="100%" height="300" viewBox="0 0 800 300">
+                        <rect x="50" y="50" width="120" height="80" rx="8" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+                        <text x="110" y="95" text-anchor="middle" fill="var(--white)" font-size="14">CloudFront</text>
+                        
+                        <rect x="250" y="50" width="120" height="80" rx="8" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+                        <text x="310" y="95" text-anchor="middle" fill="var(--white)" font-size="14">Load Balancer</text>
+                        
+                        <rect x="450" y="30" width="100" height="60" rx="8" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+                        <text x="500" y="65" text-anchor="middle" fill="var(--white)" font-size="12">EC2</text>
+                        
+                        <rect x="450" y="110" width="100" height="60" rx="8" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+                        <text x="500" y="145" text-anchor="middle" fill="var(--white)" font-size="12">EC2</text>
+                        
+                        <rect x="630" y="50" width="120" height="80" rx="8" fill="var(--card-bg)" stroke="var(--accent)" stroke-width="2"/>
+                        <text x="690" y="95" text-anchor="middle" fill="var(--white)" font-size="14">RDS Multi-AZ</text>
+                        
+                        <line x1="170" y1="90" x2="250" y2="90" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="370" y1="90" x2="450" y2="60" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="370" y1="90" x2="450" y2="140" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="550" y1="60" x2="630" y2="90" stroke="var(--accent)" stroke-width="2"/>
+                        <line x1="550" y1="140" x2="630" y2="90" stroke="var(--accent)" stroke-width="2"/>
+                    </svg>
+                </div>
+            </section>
+
+            <section id="step-1" class="content-section">
+                <h2>Step 1: Create VPC</h2>
+                <p>Start by creating a Virtual Private Cloud to isolate your infrastructure.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-language">bash</span>
+                        <button class="code-copy">Copy</button>
+                    </div>
+                    <pre><code>aws ec2 create-vpc \
+  --cidr-block 10.0.0.0/16 \
+  --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=production-vpc}]'</code></pre>
+                </div>
+                <p>This creates a VPC with a /16 CIDR block, providing 65,536 IP addresses for your infrastructure.</p>
+            </section>
+
+            <section id="step-2" class="content-section">
+                <h2>Step 2: Create Subnets</h2>
+                <p>Create public and private subnets across multiple availability zones for high availability.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-language">bash</span>
+                        <button class="code-copy">Copy</button>
+                    </div>
+                    <pre><code>aws ec2 create-subnet \
+  --vpc-id vpc-xxxxx \
+  --cidr-block 10.0.1.0/24 \
+  --availability-zone us-east-1a \
+  --tag-specifications 'ResourceType=subnet,Tags=[{Key=Name,Value=public-subnet-1a}]'</code></pre>
+                </div>
+            </section>
+
+            <section id="step-3" class="content-section">
+                <h2>Step 3: Configure Routing</h2>
+                <p>Set up route tables to control traffic flow between subnets and the internet.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-language">bash</span>
+                        <button class="code-copy">Copy</button>
+                    </div>
+                    <pre><code>aws ec2 create-route-table \
+  --vpc-id vpc-xxxxx \
+  --tag-specifications 'ResourceType=route-table,Tags=[{Key=Name,Value=public-rt}]'</code></pre>
+                </div>
+            </section>
+
+            <section id="step-4" class="content-section">
+                <h2>Step 4: Deploy Servers</h2>
+                <p>Launch EC2 instances with Auto Scaling to handle variable traffic loads.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-language">bash</span>
+                        <button class="code-copy">Copy</button>
+                    </div>
+                    <pre><code>aws autoscaling create-auto-scaling-group \
+  --auto-scaling-group-name production-asg \
+  --launch-template LaunchTemplateName=web-server-template \
+  --min-size 2 \
+  --max-size 10 \
+  --desired-capacity 2 \
+  --vpc-zone-identifier "subnet-xxxxx,subnet-yyyyy"</code></pre>
+                </div>
+            </section>
+
+            <section id="step-5" class="content-section">
+                <h2>Step 5: Configure Monitoring</h2>
+                <p>Set up CloudWatch alarms to monitor your infrastructure health and performance.</p>
+                <div class="code-block">
+                    <div class="code-header">
+                        <span class="code-language">bash</span>
+                        <button class="code-copy">Copy</button>
+                    </div>
+                    <pre><code>aws cloudwatch put-metric-alarm \
+  --alarm-name high-cpu-alarm \
+  --alarm-description "Alarm when CPU exceeds 70%" \
+  --metric-name CPUUtilization \
+  --namespace AWS/EC2 \
+  --statistic Average \
+  --period 300 \
+  --threshold 70 \
+  --comparison-operator GreaterThanThreshold</code></pre>
+                </div>
+            </section>
+
+            <section id="commands" class="content-section">
+                <h2>Command Reference</h2>
+                <p>Quick reference for all commands used in this project.</p>
+                
+                <div class="terminal-block">
+                    <div class="terminal-header">
+                        <span class="terminal-title">Terminal</span>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">aws ec2 describe-instances</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">aws ec2 create-vpc --cidr-block 10.0.0.0/16</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">aws rds create-db-instance --db-instance-identifier prod-db</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">$</span>
+                            <span class="terminal-command">aws autoscaling describe-auto-scaling-groups</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="troubleshooting" class="content-section">
+                <h2>Troubleshooting</h2>
+                <p>Common issues and their solutions.</p>
+                
+                <div class="troubleshooting-item">
+                    <h3 class="trouble-title">Port Not Accessible</h3>
+                    <p class="trouble-problem"><strong>Problem:</strong> Cannot connect to EC2 instance on port 80 or 443.</p>
+                    <p class="trouble-solution"><strong>Solution:</strong> Check security group rules. Ensure inbound rules allow traffic on ports 80 and 443 from 0.0.0.0/0. Verify NACL rules and route tables.</p>
+                </div>
+                
+                <div class="troubleshooting-item">
+                    <h3 class="trouble-title">Permission Denied</h3>
+                    <p class="trouble-problem"><strong>Problem:</strong> AWS CLI commands fail with "Access Denied" error.</p>
+                    <p class="trouble-solution"><strong>Solution:</strong> Verify IAM user has necessary permissions. Check IAM policy attached to user or role. Use <code>aws sts get-caller-identity</code> to verify credentials.</p>
+                </div>
+                
+                <div class="troubleshooting-item">
+                    <h3 class="trouble-title">Service Not Starting</h3>
+                    <p class="trouble-problem"><strong>Problem:</strong> Application fails to start on EC2 instance.</p>
+                    <p class="trouble-solution"><strong>Solution:</strong> Check application logs in <code>/var/log/</code>. Verify all dependencies are installed. Check if required ports are already in use with <code>netstat -tulpn</code>.</p>
+                </div>
+                
+                <div class="troubleshooting-item">
+                    <h3 class="trouble-title">Database Connection Failed</h3>
+                    <p class="trouble-problem"><strong>Problem:</strong> Cannot connect to RDS database from EC2.</p>
+                    <p class="trouble-solution"><strong>Solution:</strong> Verify RDS security group allows inbound traffic from EC2 security group. Check database endpoint and port. Ensure database is in available state.</p>
+                </div>
+            </section>
+
+            <div class="project-navigation"></div>
+                <a href="aws-lab.html#projects" class="nav-btn nav-btn-prev">← Back to Projects</a>
+                <a href="#" class="nav-btn nav-btn-next">Next Project →</a>
+            </div>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4 class="footer-title">AWS Engineering Lab</h4>
+                    <p class="footer-text">Learn real AWS infrastructure engineering</p>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Resources</h4>
+                    <a href="#" class="footer-link">About</a>
+                    <a href="#" class="footer-link">Projects</a>
+                    <a href="#" class="footer-link">Learning Path</a>
+                </div>
+                <div class="footer-section">
+                    <h4 class="footer-title">Community</h4>
+                    <a href="#" class="footer-link">GitHub</a>
+                    <a href="#" class="footer-link">Documentation</a>
+                    <a href="#" class="footer-link">Contribute</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>Built for engineers who build production systems</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="aws-script.js"></script>
+    <script src="project-detail.js"></script>
+</body>
+</html>
